@@ -8,7 +8,7 @@ from flaskr.logo.routes import logo
 def app_factory(test_config=None):
     """
     create and configure the app
-    :param test_config: 
+    :param test_config: param for application test configuration
     :return: object
     """
 
