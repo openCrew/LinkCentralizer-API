@@ -22,4 +22,3 @@ tests:
 ## Print help message
 help:
 	echo HELP! I need somebody HELP!
-	
