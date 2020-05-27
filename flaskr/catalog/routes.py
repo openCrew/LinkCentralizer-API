@@ -8,5 +8,4 @@ catalog = Blueprint(
 
 @catalog.route('/api/catalog')
 def show_logo():
-
     return 'Logo!'
