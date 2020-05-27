@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+    lc_app:
+        container_name: lc_app
+        build: .
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./flaskr:/flaskr
+        environment:
+            - FLASK_APP=/flaskr/wsgi.py
+            - FLASK_DEBUG=True
