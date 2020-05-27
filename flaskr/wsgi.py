@@ -1,3 +1,3 @@
-import flaskr
+from run import app_factory
 
-application = flaskr.app_factory()
+application = app_factory()
