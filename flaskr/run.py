@@ -2,7 +2,9 @@ import os
 from flask import Flask
 from flask_restful import Api
 
-from resources.catalog_resource import HelloWorld
+from resources.catalog_resource import CatalogResource
+
+
 def app_factory(test_config=None):
     """
     create and configure the app
@@ -30,8 +32,6 @@ def app_factory(test_config=None):
     except OSError:
         pass
 
-
-    api.add_resource(HelloWorld, '/')
-
+    api.add_resource(CatalogResource, '/')
 
     return app
