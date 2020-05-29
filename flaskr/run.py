@@ -3,7 +3,7 @@ from flask import Flask
 from flask_restful import Api
 
 from resources.catalog_resource import CatalogResource
-
+from resources.healthcheck_resource import HealthcheckResource
 
 def app_factory(test_config=None):
     """
@@ -33,5 +33,6 @@ def app_factory(test_config=None):
         pass
 
     api.add_resource(CatalogResource, '/')
+    api.add_resource(HealthcheckResource, '/healthcheck')
 
     return app
