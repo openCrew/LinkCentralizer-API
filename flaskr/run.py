@@ -1,8 +1,8 @@
 import os
-
 from flask import Flask
-from catalog.routes import catalog
+from flask_restful import Api
 
+from resources.catalog_resource import HelloWorld
 def app_factory(test_config=None):
     """
     create and configure the app
@@ -11,6 +11,7 @@ def app_factory(test_config=None):
     """
 
     app = Flask(__name__, instance_relative_config=True)
+    api = Api(app)
 
     app.config.from_mapping(
         SECRET_KEY='dev',
@@ -29,12 +30,8 @@ def app_factory(test_config=None):
     except OSError:
         pass
 
-    # Blueprints
-    app.register_blueprint(catalog)
 
+    api.add_resource(HelloWorld, '/')
 
-    @app.route('/api')
-    def hello():
-        return 'Opa! Me achou!'
 
     return app
