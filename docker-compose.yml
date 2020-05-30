@@ -19,7 +19,8 @@ services:
             - MONGO_INIT_ROOT_HOSTNAME=mongodb
         depends_on:
             - lc_db
-    mongodb:
+        networks:
+    lc_db:
         image: mongo:4.0.8
         container_name: lc_db
         restart: unless-stopped
@@ -34,3 +35,5 @@ services:
            - ./flaskr:/database
         ports:
         - '27017:27017'
+        networks:
+            - lc_db
