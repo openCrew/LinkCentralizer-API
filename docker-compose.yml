@@ -18,7 +18,7 @@ services:
             - MONGO_INIT_ROOT_PASSWORD=589612f86db2a2b483b007bc2a1e9665
             - MONGO_INIT_ROOT_HOSTNAME=mongodb
         depends_on:
-            - mongodb
+            - lc_db
     mongodb:
         image: mongo:4.0.8
         container_name: lc_db
