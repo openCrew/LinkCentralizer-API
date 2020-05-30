@@ -20,6 +20,8 @@ services:
         depends_on:
             - lc_db
         networks:
+            - lc_db
+
     lc_db:
         image: mongo:4.0.8
         container_name: lc_db
