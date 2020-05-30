@@ -20,7 +20,7 @@ services:
         depends_on:
             - lc_db
         networks:
-            - lc_db
+            - lc_network
 
     lc_db:
         image: mongo:4.0.8
@@ -35,7 +35,11 @@ services:
             MONDODB_LOG_DIR: /dev/null
         volumes:
            - ./flaskr:/database
-        ports:
-        - '27017:27017'
+        expose:
+            - "27017"
         networks:
-            - lc_db
+            - lc_network
+
+networks:
+  lc_network:
+      driver: bridge
