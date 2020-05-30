@@ -21,7 +21,7 @@ services:
             - mongodb
     mongodb:
         image: mongo:4.0.8
-        container_name: mongodb
+        container_name: lc_db
         restart: unless-stopped
         command: mongod --auth
         environment:
