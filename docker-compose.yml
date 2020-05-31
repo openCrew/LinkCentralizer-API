@@ -12,3 +12,34 @@ services:
         environment:
             - FLASK_APP=/flaskr/wsgi.py
             - FLASK_DEBUG=True
+            - APP_PORT=5000
+            - MONGO_INITDB_DATABASE=LinkCentralizer
+            - MONOG_INITDB_ROOT_USERNAME=admin
+            - MONGO_INIT_ROOT_PASSWORD=589612f86db2a2b483b007bc2a1e9665
+            - MONGO_INIT_ROOT_HOSTNAME=mongodb
+        depends_on:
+            - lc_db
+        networks:
+            - lc_network
+
+    lc_db:
+        image: mongo:4.0.8
+        container_name: lc_db
+        restart: unless-stopped
+        command: mongod --auth
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: admin
+            MONGO_INITDB_ROOT_PASSWORD: 589612f86db2a2b483b007bc2a1e9665
+            MONGO_INITDB_DATABASE: LinkCentralizer
+            MONGODB_DATA_DIR: /data/db
+            MONDODB_LOG_DIR: /dev/null
+        volumes:
+           - ./flaskr:/database
+        expose:
+            - "27017"
+        networks:
+            - lc_network
+
+networks:
+  lc_network:
+      driver: bridge
