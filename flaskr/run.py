@@ -3,7 +3,19 @@ from flask import Flask
 from flask_restful import Api
 
 from resources.catalog_resource import CatalogResource
+from resources.healthcheck_resource import HealthcheckResource
 
+def api(app):
+    """
+    mount api based on app passed
+    :param: none
+    :return: none
+    """ 
+
+    api = Api(app)
+
+    api.add_resource(CatalogResource, '/')
+    api.add_resource(HealthcheckResource, '/healthcheck')
 
 def app_factory(test_config=None):
     """
@@ -13,7 +25,6 @@ def app_factory(test_config=None):
     """
 
     app = Flask(__name__, instance_relative_config=True)
-    api = Api(app)
 
     app.config.from_mapping(
         SECRET_KEY='dev',
@@ -32,6 +43,6 @@ def app_factory(test_config=None):
     except OSError:
         pass
 
-    api.add_resource(CatalogResource, '/')
+    api(app)
 
     return app
