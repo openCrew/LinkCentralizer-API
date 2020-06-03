@@ -25,6 +25,9 @@ services:
     lc_db:
         image: mongo:4.0.8
         container_name: lc_db
+        build:
+        context: flaskr / database
+        dockerfile: Dockerfile
         restart: unless-stopped
         command: mongod --auth
         environment:
