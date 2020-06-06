@@ -5,3 +5,5 @@ from typing import Tuple
 class HealthcheckResource(Resource):
     def get(self) -> Tuple[str, int]:
         return 'Working', 200
+
+"""um comentario qlqr"""
