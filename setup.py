@@ -19,7 +19,7 @@ setup(
     license='MIT',
     description=__description__,
     long_description=__long_description__,
-    url='https://github.com/openCrew/LinkCentralizer.git',
+    url='https://github.com/openCrew/LinkCentralizer-Api.git',
     keywords='API, CENTRALIZER',
     include_package_data=True,
     zip_safe=False,
