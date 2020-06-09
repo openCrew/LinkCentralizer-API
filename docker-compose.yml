@@ -5,13 +5,15 @@ services:
     lc_app:
         container_name: lc_app
         build: .
+        command: flask run --port=5000 --host=0.0.0.0
+
         ports:
             - "5000:5000"
         volumes:
             - ./flaskr:/flaskr
         environment:
-            - FLASK_APP=/flaskr/wsgi.py
-            - FLASK_DEBUG=True
+            - FLASK_ENV=development
+            - FLASK_APP=app.py
             - APP_PORT=5000
             - MONGO_INITDB_DATABASE=LinkCentralizer
             - MONOG_INITDB_ROOT_USERNAME=admin
