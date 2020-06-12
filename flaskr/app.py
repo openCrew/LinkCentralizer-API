@@ -1,11 +1,14 @@
 import os
 from flask import Flask
 from flask_restful import Api
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 from resources.catalog_resource import CatalogResource
 from resources.healthcheck_resource import HealthcheckResource
 
 from config import config
+
 
 
 def create_api(app: Flask) -> None:
@@ -26,12 +29,19 @@ def create_app() -> Flask:
     """
     app = Flask(__name__, instance_relative_config=True)
     flask_env = os.getenv("FLASK_ENV")
+
     app.config.from_object(config[flask_env])
+
     create_api(app)
 
     return app
 
+application = create_app()
+db = SQLAlchemy(application)
+migrate = Migrate(application, db)
 
-if __name__ == "__main__":
-    app_run = create_app()
-    app_run.run(host='0.0.0.0', port=8000, debug=True)
+from models.catalog_model import Catalog
+
+# if __name__ == "__main__":
+#     app_run = create_app()
+#     app_run.run(host='0.0.0.0', port=8000, debug=True)

@@ -15,30 +15,26 @@ services:
             - FLASK_ENV=development
             - FLASK_APP=app.py
             - APP_PORT=5000
-            - MONGO_INITDB_DATABASE=LinkCentralizer
-            - MONOG_INITDB_ROOT_USERNAME=admin
-            - MONGO_INIT_ROOT_PASSWORD=589612f86db2a2b483b007bc2a1e9665
-            - MONGO_INIT_ROOT_HOSTNAME=mongodb
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=dev
         depends_on:
             - lc_db
         networks:
             - lc_network
 
     lc_db:
-        image: mongo:4.0.8
-        container_name: lc_db
-        restart: unless-stopped
-        command: mongod --auth
+        image: postgres
+        container_name: "postgres_lc"
         environment:
-            MONGO_INITDB_ROOT_USERNAME: admin
-            MONGO_INITDB_ROOT_PASSWORD: 589612f86db2a2b483b007bc2a1e9665
-            MONGO_INITDB_DATABASE: LinkCentralizer
-            MONGODB_DATA_DIR: /data/db
-            MONDODB_LOG_DIR: /dev/null
+            - POSTGRES_DB=db_local
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=dev
+            - TZ=GMT
         volumes:
-           - ./flaskr:/database
-        expose:
-            - "27017"
+            - "./data/postgres:/var/lib/postgresql/data"
+        ports:
+            - "5432:5432"
+
         networks:
             - lc_network
 
