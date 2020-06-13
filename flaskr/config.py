@@ -1,3 +1,6 @@
+import os
+
+
 class Config:
     """Base config, uses staging database server."""
     DEBUG = False
@@ -15,6 +18,12 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     FLASK_ENV = 'development'
     DB_SERVER = 'lc_db:27017'
+    POSTGRES_USER = os.getenv("POSTGRES_USER")
+    POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
+    SQLALCHEMY_DATABASE_URI = f"postgres://{POSTGRES_USER}:" \
+                              f"{POSTGRES_PASSWORD}@lc_db:5432/db_local"
+    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     DEBUG = True
 
 

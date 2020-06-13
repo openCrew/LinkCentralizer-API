@@ -22,3 +22,14 @@ tests:
 ## Print help message
 help:
 	echo HELP! I need somebody HELP!
+
+## init db
+db_init:
+	 docker exec -it lc_app flask db init
+
+## migrate db
+migrate:
+	docker exec -it lc_app flask db migrate
+
+db_upgrade:
+	docker exec -it lc_app flask db upgrade
